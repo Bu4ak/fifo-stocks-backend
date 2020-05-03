@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use Illuminate\Validation\UnauthorizedException;
+use Ramsey\Uuid\Uuid;
 
 class AuthController extends Controller
 {
@@ -22,7 +21,7 @@ class AuthController extends Controller
         $user = new User();
         $user->login = $request->get('login');
         $user->password = Hash::make($request->get('password'));
-        $user->token = Str::random();
+        $user->token = Uuid::uuid4();
         $user->save();
 
         return ['token' => $user->token];
