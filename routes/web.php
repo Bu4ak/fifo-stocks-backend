@@ -13,9 +13,14 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+$router->get(
+    '/',
+    function () use ($router) {
+        return $router->app->version();
+    }
+);
 
 $router->post('/signup', 'AuthController@signUp');
 $router->post('/signin', 'AuthController@signIn');
+
+$router->post('/stock', ['middleware' => 'auth', 'uses' => 'StockController@store']);
