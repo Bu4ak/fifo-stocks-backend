@@ -8,13 +8,12 @@ use Illuminate\Database\Eloquent\Model;
  * Class User
  *
  * @property $id
- * @property $user_id
- * @property $name
- * @property $ticker
- * @property $lot_size
+ * @property $amount
+ * @property $count
+ * @property $stock_id
  * @package App
  */
-class Stock extends Model
+class Entry extends Model
 {
     protected $hidden = ['user_id'];
     protected $casts = [

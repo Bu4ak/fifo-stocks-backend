@@ -13,13 +13,15 @@ class StockController extends Controller
             $request,
             [
                 'name' => 'required|min:3',
-                'ticker' => 'min:2',
+                'ticker' => 'required|min:2',
+                'lot_size' => 'required|min:1',
             ]
         );
         $stock = new Stock();
         $stock->user_id = $request->user()->id;
         $stock->name = $request->get('name');
         $stock->ticker = $request->get('ticker');
+        $stock->lot_size = $request->get('lot_size');
         $stock->save();
 
         return $stock;

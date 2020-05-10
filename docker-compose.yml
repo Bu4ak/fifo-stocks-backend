@@ -1,0 +1,14 @@
+version: "3.1"
+services:
+  postgres:
+    image: postgres:12-alpine
+    ports:
+      - "5432:5432"
+    container_name: postgres
+    working_dir: /application
+    volumes:
+      - ./docker/pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=fifo

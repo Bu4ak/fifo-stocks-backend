@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStocksTable extends Migration
+class CreateEntriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,18 +15,18 @@ class CreateStocksTable extends Migration
     public function up()
     {
         Schema::create(
-            'stocks',
+            'entries',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
-                $table->string('name')->nullable(false);
-                $table->string('ticker')->nullable(true);
-                $table->integer('lot_size')->default(1);
-                $table->uuid('user_id')->nullable(false);
-                $table->foreign('user_id')->references('id')->on('users');
+                $table->integer('amount')->nullable(false);
+                $table->integer('count')->default(1);
+
+                $table->uuid('stock_id')->nullable(false);
+                $table->foreign('stock_id')->references('id')->on('stocks');
                 $table->timestamps();
             }
         );
-        DB::statement('ALTER TABLE stocks ALTER COLUMN id SET DEFAULT uuid_generate_v4();');
+        DB::statement('alter table entries alter column id set default uuid_generate_v4();');
     }
 
     /**
@@ -34,8 +34,9 @@ class CreateStocksTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public
+    function down()
     {
-        //
+        Schema::dropIfExists('entries');
     }
 }
