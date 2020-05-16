@@ -20,4 +20,10 @@ class Stock extends Model
     protected $casts = [
         'id' => 'string',
     ];
+    public  $keyType = 'string';
+
+    public function entries()
+    {
+        return $this->hasMany(Entry::class);
+    }
 }

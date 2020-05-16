@@ -24,3 +24,6 @@ $router->post('/signup', 'AuthController@signUp');
 $router->post('/signin', 'AuthController@signIn');
 
 $router->post('/stock', ['middleware' => 'auth', 'uses' => 'StockController@store']);
+$router->post('/stock-data/{id}', ['middleware' => 'auth', 'uses' => 'StockController@show']);
+$router->post('/stocks', ['middleware' => 'auth', 'uses' => 'StockController@index']);
+$router->post('/entry', ['middleware' => 'auth', 'uses' => 'EntryController@store']);

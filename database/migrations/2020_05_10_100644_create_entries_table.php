@@ -18,7 +18,7 @@ class CreateEntriesTable extends Migration
             'entries',
             function (Blueprint $table) {
                 $table->uuid('id')->primary();
-                $table->integer('amount')->nullable(false);
+                $table->float('amount')->nullable(false);
                 $table->integer('count')->default(1);
 
                 $table->uuid('stock_id')->nullable(false);

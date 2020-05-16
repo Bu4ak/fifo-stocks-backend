@@ -19,4 +19,10 @@ class Entry extends Model
     protected $casts = [
         'id' => 'string',
     ];
+    public  $keyType = 'string';
+
+    public function stock()
+    {
+        return $this->belongsTo(Stock::class);
+    }
 }
