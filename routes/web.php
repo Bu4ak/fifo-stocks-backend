@@ -27,3 +27,4 @@ $router->post('/stock', ['middleware' => 'auth', 'uses' => 'StockController@stor
 $router->post('/stock-data/{id}', ['middleware' => 'auth', 'uses' => 'StockController@show']);
 $router->post('/stocks', ['middleware' => 'auth', 'uses' => 'StockController@index']);
 $router->post('/entry', ['middleware' => 'auth', 'uses' => 'EntryController@store']);
+$router->post('/entry-sell', ['middleware' => 'auth', 'uses' => 'EntryController@delete']);
