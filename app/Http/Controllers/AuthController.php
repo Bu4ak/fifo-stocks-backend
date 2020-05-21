@@ -14,8 +14,8 @@ class AuthController extends Controller
         $this->validate(
             $request,
             [
-                'login' => 'required|unique:users|min:4',
-                'password' => 'required|min:6',
+                'login' => 'required|unique:users|min:4|max:30',
+                'password' => 'required|min:6|max:60',
             ]
         );
         $user = new User();
@@ -32,8 +32,8 @@ class AuthController extends Controller
         $this->validate(
             $request,
             [
-                'login' => 'required',
-                'password' => 'required',
+                'login' => 'required|min:4|max:30',
+                'password' => 'required|min:6|max:60',
             ]
         );
         /** @var User $user */
