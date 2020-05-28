@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Entry;
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EntryController extends Controller
 {
@@ -51,30 +52,36 @@ class EntryController extends Controller
             )
             ->firstOrFail();
         $count = (int)$request->get('count');
+        DB::beginTransaction();
+        try {
+            foreach ($stock->entries as $entry) {
+                if ($entry->count === $count) {
+                    $entry->delete();
 
-        foreach ($stock->entries as $entry) {
-            if ($entry->count === $count) {
-                $entry->delete();
-                return;
-            }
+                    return;
+                }
 
-            if ($count === 0) {
-                return;
-            }
+                if ($count === 0) {
+                    return;
+                }
 
-            if ($entry->count < $count) {
-                $count -= $entry->count;
-                $entry->delete();
-                continue;
-            }
+                if ($entry->count < $count) {
+                    $count -= $entry->count;
+                    $entry->delete();
+                    continue;
+                }
 
-            if ($entry->count > $count) {
-                $entry->count -= $count;
-                $entry->save();
-                return;
+                if ($entry->count > $count) {
+                    $entry->count -= $count;
+                    $entry->save();
+
+                    return;
+                }
             }
+            DB::commit();
+        } catch (\Throwable $exception) {
+            DB::rollBack();
+            throw  $exception;
         }
-
-        return $request;
     }
 }
