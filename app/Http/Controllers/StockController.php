@@ -31,29 +31,26 @@ class StockController extends Controller
 
     public function show($id, Request $request)
     {
-        $stock = Stock::where('user_id', $request->user()->id)->where('id', $id)->with(['entries' => function($q) {
-            $q->orderBy('created_at');
-        }])->first()->toArray();
+        $stock = Stock::where('user_id', $request->user()->id)
+            ->where('id', $id)
+            ->with(
+                [
+                    'entries' => function ($q) {
+                        $q->orderBy('created_at');
+                    },
+                ]
+            )->first()->toArray();
         $entries = [];
         foreach ($stock['entries'] as $entry) {
             $entries[$entry['id']] = $entry;
         }
         $stock['entries'] = $entries;
+
         return $stock;
     }
 
     public function index(Request $request)
     {
-        $result = [];
-        foreach (Stock::where('user_id', $request->user()->id)->with('entries')->get()->toArray() as $item) {
-            $entries = [];
-            foreach ($item['entries'] as $entry) {
-                $entries[$entry['id']] = $entry;
-            }
-            $item['entries'] = $entries;
-            $result[$item['id']] = $item;
-        }
-
-        return $result;
+        return Stock::where('user_id', $request->user()->id)->get();
     }
 }
