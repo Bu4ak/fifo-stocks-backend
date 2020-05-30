@@ -10,6 +10,7 @@ use Laravel\Lumen\Auth\Authorizable;
 
 /**
  * Class User
+ *
  * @property $id
  * @property $password
  * @property $login
@@ -20,13 +21,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use Authenticatable, Authorizable;
 
+    public $keyType = 'string';
     protected $casts = [
         'id' => 'string',
     ];
-
     protected $hidden = [
         'password',
     ];
-
-    public  $keyType = 'string';
 }

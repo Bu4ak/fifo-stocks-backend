@@ -51,7 +51,7 @@ class EntryController extends Controller
                 ]
             )
             ->firstOrFail();
-        $count = (int)$request->get('count');
+        $count = (int) $request->get('count');
         DB::beginTransaction();
         try {
             foreach ($stock->entries as $entry) {

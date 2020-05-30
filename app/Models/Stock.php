@@ -16,11 +16,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Stock extends Model
 {
+    public $keyType = 'string';
     protected $hidden = ['user_id'];
     protected $casts = [
         'id' => 'string',
     ];
-    public  $keyType = 'string';
 
     public function entries()
     {
