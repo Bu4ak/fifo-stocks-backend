@@ -1,13 +1,17 @@
 <?php
 
+use Laravel\Lumen\Application;
+use Laravel\Lumen\Testing\DatabaseTransactions;
 use Laravel\Lumen\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
+    use DatabaseTransactions;
+
     /**
      * Creates the application.
      *
-     * @return \Laravel\Lumen\Application
+     * @return Application
      */
     public function createApplication()
     {
