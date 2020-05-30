@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property $name
  * @property $ticker
  * @property $lot_size
- * @package App
  */
 class Stock extends Model
 {

@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property $amount
  * @property $count
  * @property $stock_id
- * @package App
  */
 class Entry extends Model
 {

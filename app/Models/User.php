@@ -15,7 +15,6 @@ use Laravel\Lumen\Auth\Authorizable;
  * @property $password
  * @property $login
  * @property $token
- * @package App
  */
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {

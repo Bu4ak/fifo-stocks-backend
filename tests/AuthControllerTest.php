@@ -7,22 +7,22 @@ class AuthControllerTest extends TestCase
         $this->post('/signup');
         $this->assertEquals(422, $this->response->getStatusCode());
         $this->seeJsonEquals([
-            "login" => [
-                "The login field is required.",
+            'login' => [
+                'The login field is required.',
             ],
-            "password" => [
-                "The password field is required.",
+            'password' => [
+                'The password field is required.',
             ],
         ]);
 
         $this->post('/signup', ['login' => 'a', 'password' => 'b']);
         $this->assertEquals(422, $this->response->getStatusCode());
         $this->seeJsonEquals([
-            "login" => [
-                "The login must be at least 4 characters.",
+            'login' => [
+                'The login must be at least 4 characters.',
             ],
-            "password" => [
-                "The password must be at least 6 characters.",
+            'password' => [
+                'The password must be at least 6 characters.',
             ],
         ]);
     }
@@ -32,13 +32,13 @@ class AuthControllerTest extends TestCase
         // registration
         $this->post('/signup', ['login' => 'testname', 'password' => 'testpassword']);
         $this->assertEquals(200, $this->response->getStatusCode());
-        $this->seeJsonStructure(["token" => []]);
+        $this->seeJsonStructure(['token' => []]);
         // repeated registration (error)
         $this->post('/signup', ['login' => 'testname', 'password' => 'testpassword']);
         $this->assertEquals(422, $this->response->getStatusCode());
         $this->seeJsonEquals([
-            "login" => [
-                "The login has already been taken.",
+            'login' => [
+                'The login has already been taken.',
             ],
         ]);
         // login with wrong credentials
@@ -47,6 +47,6 @@ class AuthControllerTest extends TestCase
         // login successfully
         $this->post('/signin', ['login' => 'testname', 'password' => 'testpassword']);
         $this->assertEquals(200, $this->response->getStatusCode());
-        $this->seeJsonStructure(["token" => []]);
+        $this->seeJsonStructure(['token' => []]);
     }
 }

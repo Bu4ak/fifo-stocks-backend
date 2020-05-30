@@ -1,3 +1,5 @@
 preset: laravel
 disabled:
   - unused_use
+  - unary_operators_spaces
+  - phpdoc_annotation_without_dot
