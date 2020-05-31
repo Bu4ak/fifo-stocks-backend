@@ -18,7 +18,8 @@ use Laravel\Lumen\Auth\Authorizable;
  */
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
-    use Authenticatable, Authorizable;
+    use Authenticatable;
+    use Authorizable;
 
     public $keyType = 'string';
     protected $casts = [
