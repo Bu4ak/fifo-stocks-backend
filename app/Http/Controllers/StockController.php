@@ -14,7 +14,7 @@ class StockController extends Controller
             [
                 'name' => 'required|min:3',
                 'ticker' => 'required|min:2',
-                'lot_size' => 'required|min:1',
+                'lot_size' => 'required|gt:0',
             ]
         );
         $stock = new Stock();
