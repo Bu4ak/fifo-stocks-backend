@@ -58,7 +58,7 @@ class EntryController extends Controller
                 if ($entry->count === $count) {
                     $entry->delete();
 
-                    return;
+                    break;
                 }
 
                 if ($count === 0) {
@@ -75,7 +75,7 @@ class EntryController extends Controller
                     $entry->count -= $count;
                     $entry->save();
 
-                    return;
+                    break;
                 }
             }
             DB::commit();
